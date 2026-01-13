@@ -1,4 +1,4 @@
-# 卜小瓜 - AI 直播智能助手
+# MelonBot 卜小瓜 - AI 直播智能助手
 
 <div align="center">
 
