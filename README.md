@@ -1,347 +1,159 @@
-﻿# 🤖 AI-XiaoPi (小皮 AI 直播机器人)
+# 卜小瓜 - AI 直播智能助手
 
 <div align="center">
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Python](https://img.shields.io/badge/python-3.10+-yellow.svg)
-![Docker](https://img.shields.io/badge/docker-supported-green.svg)
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20Mac-lightgrey)
 
-**全球首个开源"硬件+软件"一体化 AI 直播机器人解决方案**
-
-[快速开始](#-快速开始) | [硬件清单](#-硬件清单-bom) | [核心特性](#-核心特性) | [加入社区](#-联系与交流)
-
-> 💼 **寻找企业级解决方案？** 查看 [商用专业版](README_COMMERCIAL.md)
-> 稳定性提升 10 倍 | 响应速度 < 1.5 秒 | 7x24 技术支持
+**软硬件一体化 AI 直播机器人解决方案**
 
 </div>
 
 ---
 
-## 📖 项目介绍
+## 产品简介
 
-**AI-XiaoPi** 是一个开源的 AI 直播助手项目，旨在为直播间提供智能化的语音互动能力。与市面上昂贵的 SaaS 服务不同，AI-XiaoPi 允许你**私有化部署**，拥有完全的数据控制权，并且**一次性硬件投入，无后续月租**。
+**卜小瓜**是一款 AI 直播智能助手，为直播间提供实时语音互动能力。系统整合了弹幕采集、大语言模型（LLM）、语音合成（TTS）和硬件终端，实现全自动化的直播互动体验。
 
-它不仅仅是一个软件+硬件机器人，更是一套打通了 **ESP32 硬件终端**、**直播弹幕获取**、**大模型(LLM)** 和 **语音合成(TTS)** 的完整链路。
+**核心价值：**
+- 私有化部署，数据完全自主可控
+- 一次性硬件投入，无持续订阅费用
+- 支持 7x24 小时无人值守直播
 
-> **适用场景：** 24小时无人直播、智能客服答疑、游戏主播辅助、娱乐整活。
-
-## 🚀 快速体验 一键整合包
-Windows平台一键启动包 Star后 加QQ群1035471161 看公告领取
-
-## 📖 视频资料
-
-
-
-https://github.com/user-attachments/assets/825d8d46-3ee6-41b7-a519-6d31d21fadd9
-
-
-
-**直播间测试**
-https://www.bilibili.com/video/BV1q9BEBkEei/?vd_source=12f6d76610175d37664858167b4e567a
-
-**流程讲解**
-https://www.bilibili.com/video/BV1sDqEBQESd/?vd_source=12f6d76610175d37664858167b4e567a
-
-**也可以不用单独的硬件终端，性价比方案，WEB中控台+安卓设备**
-https://www.bilibili.com/video/BV1JrvDBcEyq/?vd_source=12f6d76610175d37664858167b4e567a
-
-## ✨ 核心特性
-
-我们采用模块化插件架构，支持市面上主流的 AI 服务，你可以像搭积木一样自由组合。
-
-| 模块 | 功能描述 | 支持列表 (已实现) |
-| :--- | :--- | :--- |
-| 🧠 **LLM 大模型** | 智能大脑，处理弹幕并生成回复 | ✅ **OpenAI (GPT-3.5/4)**<br>✅ **ChatGLM (智谱 AI)**<br>✅ **DeepSeek (深度求索)**<br>✅ **Ollama (本地私有模型)**<br>✅ **FastGPT / Dify / Coze (知识库支持)**<br>✅ **Gemini / Xinference** |
-| 🗣️ **TTS 语音** | 将文字回复转换为真人语音 | ✅ **Edge TTS (微软免费，强烈推荐)**<br>✅ **阿里云 TTS**<br>✅ **GPT-SoVITS (克隆音色)**<br>✅ **豆包 / 火山引擎**<br>✅ **讯飞星火** |
-| 👂 **弹幕监听** | 实时获取直播间互动数据 | ✅ **抖音 (Douyin)** via DouyinBarrageGrab<br>✅ **Bilibili** <br>✅ **快手/TikTok**  |
-| 🤖 **硬件控制** | 软硬结合，实体机器人动作交互 | ✅ **ESP32 舵机控制**<br>✅ **LCD 表情显示**<br>✅ **WS2812 氛围灯效** |
-
-## ✨ 核心功能
-
-- **多种弹幕采集模式**
-  - 模拟模式：用于开发测试
-  - 代理模式：通过 DouyinBarrageGrab 获取真实弹幕（推荐）
-  - 直连模式：直接连接（需自行实现）
-
-- **智能流量控制**
-  - 串行化处理：一次只处理一条弹幕
-  - 自动忽略中间弹幕：只响应最新的弹幕
-  - 防止音频堆积和播放混乱
-
-- **灵活的AI配置**
-  - 支持多种LLM提供商（OpenAI, ChatGLM, Gemini等）
-  - 支持多种TTS引擎（Edge TTS, 阿里云等）
-  - 可自定义AI角色和回复风格
-
-- **硬件设备支持**
-  - WebSocket连接管理
-  - 设备自动发现和心跳检测
-  - OTA固件更新接口
-
-## 🛠 硬件清单 (BOM)
-
-如果你想体验“实体机器人”的乐趣，建议购买以下配件（成本约 ¥100-200）。
-**注：没有硬件也可以使用“纯软件模式”运行！**
-
-1.  **主控板：** ESP32-S3 开发板 (推荐 N16R8 版本)
-2.  **音频模块：** MAX98357 I2S 功放模块
-3.  **麦克风：** INMP441 全向麦克风
-4.  **扬声器：** 4Ω 3W 小喇叭
-5.  **外壳：** 3D 打印模型 (STL 文件位于 doc/3d_models 目录)
-
-*(详细接线图请参考 docs/HARDWARE_SETUP.md)*
-
-## 🚀 快速开始
-
-### 环境要求
-
-- Python 3.8+
-- (可选) 直播间
-- (可选) ESP32硬件设备
-
-### 安装步骤
-
-1. **克隆项目**
-```bash
-git clone <your-repo-url>
-cd XiaoPi
-```
-
-2. **安装依赖**
-```bash
-pip install -r requirements.txt
-```
-
-3. **配置服务**
-
-编辑 `danmaku_config.yaml` 文件：
-
-```yaml
-danmaku:
-  # 填写你的直播间ID（如果使用真实弹幕）
-  room_id: your_room_id
-
-  # 工作模式选择
-  use_mock: false      # 是否使用模拟数据
-  use_proxy: true      # 是否使用 DouyinBarrageGrab 代理
-  proxy_ws_url: "ws://127.0.0.1:8888"
-
-# 配置你的LLM（这里使用智谱GLM-4-Flash）
-LLM:
-  ChatGLMLLM:
-    api_key: your_api_key_here
-
-# 配置你的TTS（这里使用免费的Edge TTS）
-TTS:
-  EdgeTTS:
-    voice: zh-CN-XiaoxiaoNeural
-```
-
-4. **启动服务**
-
-**Linux/macOS:**
-```bash
-./run_bot.sh
-```
-
-**Windows:**
-```bash
-run_bot.bat
-```
-
-或直接运行：
-```bash
-python run_bot.py
-```
-
-### 使用 DouyinBarrageGrab（推荐）
-
-如果要获取真实的弹幕，需要先启动 DouyinBarrageGrab：
-
-1. 进入 DouyinBarrageGrab 目录
-2. 运行弹幕抓取服务（默认端口 8888）
-3. 在浏览器中打开直播间并连接
-
-详细说明请参考 `DouyinBarrageGrab` 目录下的 README。
-
-## 🔧 工作原理
-
-```
-┌─────────────┐
-│ 直播间   │
-└──────┬──────┘
-       │ 弹幕消息
-       ▼
-┌─────────────────────┐
-│ DouyinBarrageGrab   │ (可选代理)
-└──────┬──────────────┘
-       │ WebSocket
-       ▼
-┌─────────────────────┐
-│ Danmaku Collector   │ 弹幕采集器
-└──────┬──────────────┘
-       │
-       ▼
-┌─────────────────────┐
-│ Danmaku Handler     │ 弹幕处理器
-│  - 串行化处理        │
-│  - 流量控制          │
-└──────┬──────────────┘
-       │
-       ▼
-┌─────────────────────┐
-│ LLM                 │ 生成回复
-└──────┬──────────────┘
-       │
-       ▼
-┌─────────────────────┐
-│ TTS                 │ 转换为语音
-└──────┬──────────────┘
-       │
-       ▼
-┌─────────────────────┐
-│ Device Manager      │ 设备管理
-└──────┬──────────────┘
-       │ WebSocket
-       ▼
-┌─────────────────────┐
-│ ESP32 硬件设备       │ 播放语音
-└─────────────────────┘
-```
-
-## 📝 配置说明
-
-### 弹幕流量控制
-
-在弹幕密集的直播间，建议启用流量控制：
-
-```yaml
-danmaku:
-  flow_control_enabled: true
-  flow_control_strategy: skip  # 推荐：跳过模式
-```
-
-- `skip`: 正在播放时直接丢弃新弹幕（推荐，体验最流畅）
-- `queue_limit`: 限制待处理队列大小
-
-### AI角色配置
-
-在 `danmaku_config.yaml` 中自定义AI角色：
-
-```yaml
-prompt: |
-  你是一个直播间的AI助手，名叫小皮。
-  回复简洁明快，每次回复控制在50字以内。
-  语气活泼友好，适合直播间氛围。
-```
-
-### LLM提供商
-
-支持多种LLM提供商，配置示例：
-
-```yaml
-selected_module:
-  LLM: ChatGLMLLM  # 或 OpenAILLM, GeminiLLM 等
-
-LLM:
-  ChatGLMLLM:
-    type: openai
-    model_name: glm-4-flash  # 免费模型
-    api_key: your_api_key
-```
-
-### TTS引擎
-
-支持多种TTS引擎，配置示例：
-
-```yaml
-selected_module:
-  TTS: EdgeTTS  # 或 AliyunTTS, DoubaoTTS 等
-
-TTS:
-  EdgeTTS:
-    type: edge
-    voice: zh-CN-XiaoxiaoNeural  # 中文女声
-```
-
-## 🐛 故障排除
-
-### 音频不播放
-
-如果硬件设备不播放音频：
-1. 检查设备是否正确连接（WebSocket日志）
-2. 查看 Rate Controller 是否启动
-3. 确认 `sentence_id` 正确设置（详见 `SENTENCE_ID_FIX.md`）
-
-### 弹幕处理延迟
-
-如果弹幕处理延迟或堆积：
-1. 启用流量控制：`flow_control_enabled: true`
-2. 使用跳过模式：`flow_control_strategy: skip`
-3. 检查 LLM/TTS 响应时间
-
-### DouyinBarrageGrab 连接失败
-
-1. 确认 DouyinBarrageGrab 已启动
-2. 检查 WebSocket 地址配置
-3. 查看防火墙设置
-
-## 🔌 插件开发
-
-想要接入新的大模型？本项目采用插件化架构，添加新功能非常简单！
-只需在 core/providers/llm 下创建一个新文件，继承 BaseLLMProvider 类即可。
-
-欢迎提交 PR 贡献你的插件！
-
-## 🗓️ 路线图 (Roadmap)
-
-- [x] 发布 v1.0 核心功能 (LLM+TTS+直播流)
-- [ ] **v1.1:** 增加 Web 管理后台 (可视化配置)
-- [ ] **v1.2:** 增加硬件适配
-
-## 📄 许可证
-
-本项目基于 [MIT License](LICENSE) 开源。
-
-## 🙏 致谢
-
-- [xiaozhi-esp32](https://github.com/78/xiaozhi-esp32) - ESP32硬件端开源项目
-- [xiaozhi-esp32-server](https://github.com/xinnan-tech/xiaozhi-esp32-server) - 后端服务基础框架
-- [DouyinBarrageGrab](https://github.com/IsoaSFlus/DouyinBarrageGrab) - 弹幕抓取
-- 所有贡献者和用户
-
-## 🤝 联系与交流
-
-- **Issue:** 有 Bug 或建议请直接提 Issue。
-- **商务合作微信:** px11360
-- **Email:** sysgiven@gmail.com
+**适用场景：** 电商带货直播、品牌宣传直播、知识付费直播、游戏娱乐直播
 
 ---
 
-**如果这个项目对你有帮助，请给一个 ⭐️ Star！你的支持是我们更新的动力！**
+## 核心能力
 
+| 模块 | 能力 | 技术支持 |
+| :--- | :--- | :--- |
+| **智能对话** | 理解弹幕语义，生成拟人化回复 | GPT-4/ChatGLM/DeepSeek/Ollama 等主流大模型 |
+| **语音合成** | 文字转真人语音，支持音色定制 | Edge TTS/阿里云/豆包/GPT-SoVITS 声音克隆 |
+| **多平台支持** | 实时采集直播间弹幕数据 | 抖音/快手/Bilibili/TikTok |
+| **硬件交互** | 实体机器人形态，增强直播趣味性 | ESP32 主控/舵机动作/LCD 表情/氛围灯效 |
 
+---
 
+## 系统架构
 
+```
+┌──────────────────────────────────────────────────────────────┐
+│                        直播平台                               │
+│                   (抖音/快手/Bilibili)                        │
+└─────────────────────────┬────────────────────────────────────┘
+                          │ 弹幕数据
+                          ▼
+┌──────────────────────────────────────────────────────────────┐
+│                     卜小瓜 服务端                              │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐          │
+│  │ 弹幕采集器   │→│ 智能对话引擎 │→│ 语音合成引擎 │          │
+│  │             │  │   (LLM)     │  │   (TTS)     │          │
+│  └─────────────┘  └─────────────┘  └─────────────┘          │
+│                          │                                    │
+│                    智能流量控制                                │
+│               (防止弹幕堆积/响应最新)                          │
+└─────────────────────────┬────────────────────────────────────┘
+                          │ WebSocket
+                          ▼
+┌──────────────────────────────────────────────────────────────┐
+│                    卜小瓜 硬件终端                             │
+│            ESP32 + 扬声器 + 舵机 + 显示屏                     │
+└──────────────────────────────────────────────────────────────┘
+```
 
+---
 
+## 技术优势
 
+### 1. 模块化插件架构
+- LLM/TTS/ASR 均采用插件化设计，可灵活替换
+- 支持本地部署和云端 API 混合调用
+- 便于接入新的 AI 服务提供商
 
+### 2. 智能流量控制
+- 串行化处理机制，确保语音播放流畅
+- 自动丢弃过期弹幕，只响应最新互动
+- 避免高峰期弹幕堆积导致的延迟
 
+### 3. 软硬件一体化
+- 标准化硬件方案，BOM 成本约 100-200 元
+- OTA 远程固件升级
+- 纯软件模式亦可独立运行
 
+---
 
+## 硬件配置
 
+| 组件 | 型号 | 用途 |
+| :--- | :--- | :--- |
+| 主控板 | ESP32-S3 N16R8 | 核心控制 |
+| 功放模块 | MAX98357 I2S | 音频输出 |
+| 麦克风 | INMP441 | 语音输入（可选） |
+| 扬声器 | 4Ω 3W | 语音播放 |
+| 显示屏 | LCD/OLED | 表情显示（可选） |
 
+---
 
+## 部署方式
 
+### 环境要求
+- Python 3.8+
+- 支持 Windows / Linux / macOS
 
+### 快速启动
 
+```bash
+# 1. 安装依赖
+pip install -r requirements.txt
 
+# 2. 配置参数
+# 编辑 configs/danmaku_config.yaml
 
+# 3. 启动服务
+python run_bot.py
+```
 
+### 核心配置项
 
+```yaml
+# 直播间配置
+danmaku:
+  room_id: your_room_id      # 直播间ID
+  use_proxy: true            # 使用弹幕代理
+  flow_control_enabled: true # 启用流量控制
 
+# AI 模型配置
+selected_module:
+  LLM: ChatGLMLLM
+  TTS: EdgeTTS
 
+# 角色人设
+prompt: |
+  你是卜小瓜，一个活泼可爱的直播间助手...
+```
 
+---
 
+## 商业模式
+
+| 版本 | 定位 | 服务内容 |
+| :--- | :--- | :--- |
+| **标准版** | 中小主播 | 软件授权 + 基础技术支持 |
+| **专业版** | 企业/MCN | 定制开发 + 私有化部署 + 专属技术支持 |
+| **硬件套装** | 全场景 | 预装系统的即插即用硬件设备 |
+
+---
+
+## 产品路线图
+
+- [x] v1.0 - 核心功能（LLM + TTS + 弹幕采集）
+- [ ] v1.1 - Web 管理后台（可视化配置）
+- [ ] v1.2 - 多账号管理 & 数据统计
+- [ ] v2.0 - 数字人形象 & 虚拟主播支持
+
+---
+
+## 联系我们
+
+如需商务合作或技术咨询，请联系卜小瓜团队。
